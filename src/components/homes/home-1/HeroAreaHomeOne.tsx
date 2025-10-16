@@ -1,37 +1,37 @@
 
 import { Link } from 'react-router-dom';
-import Count from '../../../common/count';
+// import Count from '../../../common/count';
 
 
 
-interface CounterItem {
-  value: number;
-  suffix?: string;
-  label: string;
-}
+// interface CounterItem {
+//   value: number;
+//   suffix?: string;
+//   label: string;
+// }
 
-const counter_data: CounterItem[] = [
-  {
-    value: 12,
-    suffix: "+",
-    label: "Years of experience",
-  },
-  {
-    value: 84,
-    suffix: "k",
-    label: "Satisfied clients",
-  },
-  {
-    value: 60,
-    suffix: "k+",
-    label: "Project completed",
-  },
-  {
-    value: 4.8,
-    suffix: "/5",
-    label: "Total success rate",
-  },
-];
+// const counter_data: CounterItem[] = [
+//   {
+//     value: 12,
+//     suffix: "+",
+//     label: "Years of experience",
+//   },
+//   {
+//     value: 84,
+//     suffix: "k",
+//     label: "Satisfied clients",
+//   },
+//   {
+//     value: 60,
+//     suffix: "k+",
+//     label: "Project completed",
+//   },
+//   {
+//     value: 4.8,
+//     suffix: "/5",
+//     label: "Total success rate",
+//   },
+// ];
 
 
 
