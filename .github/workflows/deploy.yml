@@ -11,40 +11,43 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Clonar el repositorio
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 2️⃣ Configurar Node.js
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
+      # 3️⃣ Instalar dependencias y build
       - name: Install dependencies and build
         run: |
           npm ci
-          npm run build
-
+          npm run build   # O npm run build si es CRA
+          
+      # 4️⃣ Mostrar contenido local (opcional)
       - name: Show local build contents
         run: |
           echo ">>> Local build listing"
           ls -la dist || (echo "No build folder found" && exit 1)
 
-      - name: Upload build files via SCP
-        uses: appleboy/scp-action@v0.1.5
-        with:
-          host: ${{ secrets.SG_HOST }}
-          username: ${{ secrets.SG_USER }}
-          key: ${{ secrets.SG_KEY }}
-          port: ${{ secrets.SG_PORT }}
-          script: |
-            mkdir -p /home/${{ secrets.SG_USER }}/domains/ramsescubidev.com/public_html
+      # 5️⃣ Empaquetar dist y subirlo con SCP
+      - name: Upload build files via tar + SCP
         env:
           DIST_DIR: dist
         run: |
+          echo "Packing dist/ into dist.tar.gz..."
           tar czf dist.tar.gz -C $DIST_DIR .
+          
+          echo "Uploading dist.tar.gz to server..."
           scp -P ${{ secrets.SG_PORT }} dist.tar.gz ${{ secrets.SG_USER }}@${{ secrets.SG_HOST }}:/home/${{ secrets.SG_USER }}/domains/ramsescubidev.com/public_html/
+          
+          echo "Extracting files on server..."
           ssh -i ~/.ssh/siteground_deploy -p ${{ secrets.SG_PORT }} ${{ secrets.SG_USER }}@${{ secrets.SG_HOST }} "cd /home/${{ secrets.SG_USER }}/domains/ramsescubidev.com/public_html && tar xzf dist.tar.gz && rm dist.tar.gz"
 
+      # 6️⃣ Verificar remotamente que los archivos estén
       - name: Verify remote files (ls)
         uses: appleboy/ssh-action@v0.1.10
         with:
@@ -53,11 +56,9 @@ jobs:
           key: ${{ secrets.SG_KEY }}
           port: ${{ secrets.SG_PORT }}
           script: |
-            echo "Remote pwd:"
-            pwd
-            echo "Listing domain public_html:"
+            echo "Listing files in public_html:"
             ls -la /home/${{ secrets.SG_USER }}/domains/ramsescubidev.com/public_html/
-            echo "Head of index.html (if exists):"
+            echo "First 20 lines of index.html:"
             if [ -f /home/${{ secrets.SG_USER }}/domains/ramsescubidev.com/public_html/index.html ]; then
               head -n 20 /home/${{ secrets.SG_USER }}/domains/ramsescubidev.com/public_html/index.html
             else
