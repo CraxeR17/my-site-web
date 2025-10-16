@@ -1,4 +1,4 @@
-name: Deploy app to SiteGround
+name: Deploy React app to SiteGround
 
 on:
   push:
@@ -24,19 +24,12 @@ jobs:
           npm ci
           npm run build
 
-      - name: Deploy to SiteGround via SSH
-        uses: appleboy/ssh-action@v0.1.10
-        with:
-          host: ${{ secrets.SG_HOST }}
-          username: ${{ secrets.SG_USER }}
-          key: ${{ secrets.SG_KEY }}
-          port: ${{ secrets.SG_PORT }}
-          script: |
-            cd /home/${{ secrets.SG_USER }}/public_html
-            rm -rf *           # Limpia el contenido anterior
-            mkdir -p build
-          # Subir los archivos build generados
-      - name: Upload build files
+      - name: Show local build contents
+        run: |
+          echo ">>> Local build listing"
+          ls -la build || (echo "No build folder found" && exit 1)
+
+      - name: Upload build files via SCP
         uses: appleboy/scp-action@v0.1.5
         with:
           host: ${{ secrets.SG_HOST }}
@@ -44,4 +37,23 @@ jobs:
           key: ${{ secrets.SG_KEY }}
           port: ${{ secrets.SG_PORT }}
           source: "build/*"
-          target: "/home/${{ secrets.SG_USER }}/public_html/"
+          target: "/home/${{ secrets.SG_USER }}/domains/ramsescubidev.com/public_html/"
+
+      - name: Verify remote files (ls)
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SG_HOST }}
+          username: ${{ secrets.SG_USER }}
+          key: ${{ secrets.SG_KEY }}
+          port: ${{ secrets.SG_PORT }}
+          script: |
+            echo "Remote pwd:"
+            pwd
+            echo "Listing domain public_html:"
+            ls -la /home/${{ secrets.SG_USER }}/domains/ramsescubidev.com/public_html/
+            echo "Head of index.html (if exists):"
+            if [ -f /home/${{ secrets.SG_USER }}/domains/ramsescubidev.com/public_html/index.html ]; then
+              head -n 20 /home/${{ secrets.SG_USER }}/domains/ramsescubidev.com/public_html/index.html
+            else
+              echo "index.html not found"
+            fi
