@@ -36,8 +36,14 @@ jobs:
           username: ${{ secrets.SG_USER }}
           key: ${{ secrets.SG_KEY }}
           port: ${{ secrets.SG_PORT }}
-          source: "dist/*"
-          target: "/home/${{ secrets.SG_USER }}/domains/ramsescubidev.com/public_html/"
+          script: |
+            mkdir -p /home/${{ secrets.SG_USER }}/domains/ramsescubidev.com/public_html
+        env:
+          DIST_DIR: dist
+        run: |
+          tar czf dist.tar.gz -C $DIST_DIR .
+          scp -P ${{ secrets.SG_PORT }} dist.tar.gz ${{ secrets.SG_USER }}@${{ secrets.SG_HOST }}:/home/${{ secrets.SG_USER }}/domains/ramsescubidev.com/public_html/
+          ssh -i ~/.ssh/siteground_deploy -p ${{ secrets.SG_PORT }} ${{ secrets.SG_USER }}@${{ secrets.SG_HOST }} "cd /home/${{ secrets.SG_USER }}/domains/ramsescubidev.com/public_html && tar xzf dist.tar.gz && rm dist.tar.gz"
 
       - name: Verify remote files (ls)
         uses: appleboy/ssh-action@v0.1.10
