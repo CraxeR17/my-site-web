@@ -1,0 +1,27 @@
+ 
+
+@import  "swiper/css/bundle";
+
+/* @import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css"; */
+
+
+
+
+@import "/assets/css/slick.css"; 
+@import "/assets/css/aos.css"; 
+@import "/assets/css/skn8ash.css";  
+@import "/assets/css/remixicon.css"; 
+@import "/assets/css/satoshi-font.css"; 
+@import "/assets/css/bootstrap.min.css"; 
+@import "/assets/css/main.css"; 
+@import "/assets/css/app.min.css"; 
+
+/* Local overrides */
+/* Prevent descenders (like 'g', 'y', 'p') from being clipped in the About 2 banner */
+.WION_text_invert_2 > .wiontitle {
+	line-height: 1.12em; /* a bit more than 1 to leave room for descenders */
+	padding-bottom: 0.05em; /* tiny buffer helps with background-clip: text in some browsers */
+}
+
+ 
