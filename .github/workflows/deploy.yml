@@ -36,7 +36,7 @@ jobs:
           username: ${{ secrets.SG_USER }}
           key: ${{ secrets.SG_KEY }}
           port: ${{ secrets.SG_PORT }}
-          source: "build/*"
+          source: "dist/*"
           target: "/home/${{ secrets.SG_USER }}/domains/ramsescubidev.com/public_html/"
 
       - name: Verify remote files (ls)
