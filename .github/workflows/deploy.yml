@@ -27,7 +27,7 @@ jobs:
       - name: Show local build contents
         run: |
           echo ">>> Local build listing"
-          ls -la build || (echo "No build folder found" && exit 1)
+          ls -la dist || (echo "No build folder found" && exit 1)
 
       - name: Upload build files via SCP
         uses: appleboy/scp-action@v0.1.5
