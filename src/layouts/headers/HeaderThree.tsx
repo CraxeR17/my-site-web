@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import  { useState } from 'react'
 import menu_data from '../../data/menu-data';
 import OffCanvas from '../../common/OffCanvas';
+import ThemeToggle from '../../common/ThemeToggle';
 
 export default function HeaderThree() {
   // mobile menu toggle
@@ -53,6 +54,7 @@ export default function HeaderThree() {
               </div>
             </div>
             <div className="col-auto d-flex align-items-center">
+              <ThemeToggle className="me-2" />
               <Link className="wiondefault-btn wionheader-btn" to="/contact-us1">Contact us
                 <span className="wionbutton-icon">
                   <img className="arry1" src="assets/images/svg/arrow-right.png" alt="" />

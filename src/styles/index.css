@@ -24,4 +24,92 @@
 	padding-bottom: 0.05em; /* tiny buffer helps with background-clip: text in some browsers */
 }
 
+/* Dark theme support */
+/* Apply dark palette when data-theme="dark" is present on <html> or <body> */
+html[data-theme="dark"],
+body[data-theme="dark"] {
+	/* base tokens */
+	/* Keep text token light so components that use var(--white-color) for text remain readable */
+	--white-color: #ffffff; /* used for text on dark surfaces */
+	--white-bg: #0f1115; /* overall page background on dark */
+	--heading-color: #e7e7ea; /* main text color */
+	--heading-bg: #151923; /* heading background surfaces */
+	--light-bg: #151923; /* cards / sections surfaces */
+}
+
+html[data-theme="dark"] body,
+body[data-theme="dark"] {
+	background: var(--white-bg);
+	color: var(--heading-color);
+}
+
+/* Sections commonly using white/bg-heading */
+html[data-theme="dark"] .bg-heading,
+body[data-theme="dark"] .bg-heading {
+	background-color: var(--heading-bg) !important;
+}
+
+/* Header background and menus */
+html[data-theme="dark"] .wionheader-section,
+body[data-theme="dark"] .wionheader-section {
+	background-color: var(--white-bg) !important;
+}
+
+/* Cards, offcanvas, sidebar, and generic panels that assume white */
+html[data-theme="dark"] .offcanvas,
+html[data-theme="dark"] .wionoffcanvas,
+html[data-theme="dark"] .wionsidebar,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .rt-card,
+html[data-theme="dark"] .wion-section,
+html[data-theme="dark"] .wion-box,
+body[data-theme="dark"] .offcanvas,
+body[data-theme="dark"] .wionoffcanvas,
+body[data-theme="dark"] .wionsidebar,
+body[data-theme="dark"] .card,
+body[data-theme="dark"] .rt-card,
+body[data-theme="dark"] .wion-section,
+body[data-theme="dark"] .wion-box {
+	background-color: var(--light-bg) !important;
+	color: var(--heading-color) !important;
+}
+
+/* Borders and separators */
+html[data-theme="dark"] hr,
+body[data-theme="dark"] hr {
+	border-top-color: rgba(231, 231, 234, 0.12);
+}
+
+/* Links and nav items inherit heading color; adjust hover for contrast */
+html[data-theme="dark"] a,
+body[data-theme="dark"] a {
+	color: var(--heading-color);
+}
+html[data-theme="dark"] a:hover,
+body[data-theme="dark"] a:hover {
+	color: #ffffff;
+}
+
+/* Dropdown menus (submenus) in dark mode */
+html[data-theme="dark"] .main-menu ul.sub-menu,
+body[data-theme="dark"] .main-menu ul.sub-menu {
+	background-color: var(--light-bg) !important; /* override vendor #fff */
+}
+html[data-theme="dark"] .main-menu ul.sub-menu li ul.sub-menu,
+body[data-theme="dark"] .main-menu ul.sub-menu li ul.sub-menu {
+	background-color: var(--light-bg) !important; /* nested submenus */
+}
+
+/* Alternate header/menu systems that also define white dropdowns */
+html[data-theme="dark"] .site-menu-main .sub-menu,
+body[data-theme="dark"] .site-menu-main .sub-menu {
+	background-color: var(--light-bg) !important;
+}
+
+/* Foundation-style dropdowns used by some components */
+html[data-theme="dark"] .is-dropdown-submenu,
+body[data-theme="dark"] .is-dropdown-submenu {
+	background-color: var(--light-bg) !important;
+}
+
  

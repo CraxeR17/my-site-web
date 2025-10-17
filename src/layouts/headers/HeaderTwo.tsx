@@ -4,6 +4,7 @@ import  { useState } from 'react';
 import menu_data from '../../data/menu-data';
 import OffCanvas from '../../common/OffCanvas';
 import Sidebar from '../../common/Sidebar';
+import ThemeToggle from '../../common/ThemeToggle';
 
 const HeaderTwo = () => {
   // mobile menu toggle
@@ -61,6 +62,7 @@ const HeaderTwo = () => {
               </div>
             </div>
             <div className="col-auto d-flex align-items-center">
+              <ThemeToggle className="me-2" />
               <div onClick={toggleOffCanvas} className="wionheader-barger">
                 <span></span>
               </div>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import menu_data from "../../data/menu-data";
 import OffCanvas from "../../common/OffCanvas";
+import ThemeToggle from "../../common/ThemeToggle";
 
 const HeaderOne = () => {
   // mobile menu toggle
@@ -18,7 +19,7 @@ const HeaderOne = () => {
             <div className="col-8 col-sm-auto ">
               <div className="header-logo">
                 <Link to="/">
-                  <img src="assets/images/logo/logo-dark.svg" alt="logo" />
+                  <img src="assets/images/logo/logo-dark.svg" alt="logo" height={85} />
                 </Link>
               </div>
             </div>
@@ -53,6 +54,7 @@ const HeaderOne = () => {
               </div>
             </div>
             <div className="col-auto d-flex align-items-center">
+              <ThemeToggle className="me-2" />
               <Link className="wiondefault-btn wionheader-btn" to="/contact-us1">Contact us
                 <span className="wionbutton-icon">
                   <img className="arry1" src="assets/images/svg/arrow-right.png" alt="" />
