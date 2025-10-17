@@ -43,7 +43,7 @@ const HeroAreaHomeOne = () => {
         <div className="container">
           <div className="wionhero-content">
             <div className="wionsub-title aos-init" data-aos-delay="400" data-aos="fade-up">
-              <p>Si lo puedes peeeeeensar, lo podemos crear.</p>
+              <p>Si lo puedes pensar, lo podemos crear.</p>
             </div>
             <h3 className="aos-init" data-aos-delay="500" data-aos="fade-up">Diseño y desarrollo sitios web y sistemas modernos</h3>
             <h3 className="aos-init" data-aos-delay="600" data-aos="fade-up">Convierte tus ideas en productos digitales funcionales y escalables</h3>

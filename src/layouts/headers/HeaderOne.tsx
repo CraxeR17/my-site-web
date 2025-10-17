@@ -19,7 +19,7 @@ const HeaderOne = () => {
             <div className="col-8 col-sm-auto ">
               <div className="header-logo">
                 <Link to="/">
-                  <img src="assets/images/logo/logo-dark.svg" alt="logo" height={85} />
+                  <img src="assets/images/logo/logo-dark.svg" alt="logo" height={70} />
                 </Link>
               </div>
             </div>
@@ -54,7 +54,7 @@ const HeaderOne = () => {
               </div>
             </div>
             <div className="col-auto d-flex align-items-center">
-              <ThemeToggle className="me-2" />
+              {/* <ThemeToggle className="me-2" /> */}
               <Link className="wiondefault-btn wionheader-btn" to="/contact-us1">Contact us
                 <span className="wionbutton-icon">
                   <img className="arry1" src="assets/images/svg/arrow-right.png" alt="" />
